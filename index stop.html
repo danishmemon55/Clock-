@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stopwatch</title>
+   <style>
+    * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #1e1e1e;
+    font-family: 'Arial', sans-serif;
+}
+header {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    padding: 10px;
+    background-color: #151313;
+    color: #fff;
+    margin: 0;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    box-shadow: 0 0 10px white;
+}
+
+
+.stopwatch-container {
+    width: 300px;
+    height: 300px;
+    border-radius: 15%;
+    background-color: rgba(3, 1, 1, 0.52);
+    border: 2px solid rgba(108, 100, 100, 0.62);
+    box-shadow: 0px 0px 15px 30px rgba(0, 0, 0, 0.9);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+
+.stopwatch-display {
+    margin-top: 40px;
+    font-size: 2rem;
+    font-weight: bold;
+    color: #FFFFFF;
+    letter-spacing: 2px;
+}
+
+.controls {
+    margin-top: 100px;
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+    width: 100%; /* Ensure the buttons take up full width */
+    padding: 0 20px; /* Add some padding to center them better */
+}
+
+.controls button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    background-color: #1e90ff;
+    color: white;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    flex: 1; /* Ensure buttons take equal width */
+}
+
+.controls button:hover {
+    background-color: #007bff;
+}
+
+.controls button:disabled {
+    background-color: #aaa;
+    cursor: not-allowed;
+}
+
+#startBtn {
+    background-color: #2B2B2B;
+}
+
+#startBtn:hover {
+    background-color: #218838;
+}
+
+#stopBtn {
+    background-color: #271214;
+}
+
+#stopBtn:hover {
+    background-color: #c82333;
+}
+
+#resetBtn {
+    background-color: #342F21;
+}
+
+#resetBtn:hover {
+    background-color: #e0a800;
+}
+.footer-icons {
+ display: flex;
+ justify-content: space-between;
+ width: 100%;
+ padding: 10px;
+ background-color: #151313;;
+ color: #fff;
+ margin: 0;
+ position: fixed;
+ bottom: 0;
+ left: 0;
+ right: 0;
+ box-shadow: 0 0 10px white;
+}
+
+.footer-icons {
+ display: flex;
+ justify-content: space-around;
+ padding: 10px;
+}
+
+.footer-icons i {
+ color: white;
+ font-size: 24px;
+ cursor: pointer;
+}
+.footer-icons a svg {
+    fill: white;
+    transition: fill 0.3s ease; /* Optional: for a smooth hover effect */
+}
+
+.footer-icons a:hover svg {
+    fill: #ccc; /* Optional: changes color when you hover over the icons */
+}
+
+   </style>
+</head>
+    <header>
+        <div class="logo">
+            <h1>Stopwatch</h1>
+        </div>
+        </header>
+
+<body>
+    <div class="stopwatch-container">
+        <div class="stopwatch-display">
+            <span id="minutes">00</span>:<span id="seconds">00</span>:<span id="milliseconds">00</span>
+        </div>
+        <div class="controls">
+            <button id="startBtn">Start</button>
+            <button id="stopBtn" disabled>Stop</button>
+            <button id="resetBtn" disabled>Reset</button>
+    </div>
+    </div>
+    <footer>
+  <div class="footer-icons">
+    <!-- Clock Icon -->
+    <a href="/index (1).html">
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-clock" viewBox="0 0 16 16">
+        <path d="M8 3.5a.5.5 0 0 1 .5.5v4h3a.5.5 0 0 1 0 1h-3.5A.5.5 0 0 1 8 8V4a.5.5 0 0 1 .5-.5z"/>
+        <path d="M8 16A8 8 0 1 1 8 0a8 8 0 0 1 0 16zM1 8a7 7 0 1 0 14 0A7 7 0 0 0 1 8z"/>
+      </svg>
+    </a>
+
+    <!-- Stopwatch Icon -->
+    <a href="/index stop.html">
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-stopwatch" viewBox="0 0 16 16">
+        <path d="M6.5 1h3v1h-3V1z"/>
+        <path d="M8 1a7 7 0 1 0 7 7 7 7 0 0 0-7-7zM8 0a8 8 0 1 1-8 8A8 8 0 0 1 8 0z"/>
+        <path d="M7.5 4h1v5h-1V4zm2.86-1.79l-.707-.707 1.415-1.414.707.707-1.415 1.414z"/>
+      </svg>
+    </a>
+
+    <!-- Timer Icon -->
+    <a href="/index.html">
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-hourglass-split" viewBox="0 0 16 16">
+        <path d="M2 15.5V14h12v1.5a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5zM2 0h12v1.5a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5V0zm2.596 2.5H11.5a.5.5 0 0 1 .5.5v2.707a2 2 0 0 1-.563 1.39L9.74 9l1.697 1.903a2 2 0 0 1 .563 1.39V15a.5.5 0 0 1-.5.5H4.104a.5.5 0 0 1-.5-.5v-2.707a2 2 0 0 1 .563-1.39L6.26 9 4.563 7.097a2 2 0 0 1-.563-1.39V3a.5.5 0 0 1 .5-.5zM11 3H5v2.707c0 .278.08.547.227.776L7.229 9l-2.002 2.517a1 1 0 0 0-.227.776V15h6v-2.707a1 1 0 0 0-.227-.776L8.771 9l2.002-2.517A1 1 0 0 0 11 5.707V3z"/>
+      </svg>
+    </a>
+  </div>
+</footer>
+<script>
+
+let timerInterval;
+let minutes = 0, seconds = 0, milliseconds = 0;
+
+const displayMinutes = document.getElementById('minutes');
+const displaySeconds = document.getElementById('seconds');
+const displayMilliseconds = document.getElementById('milliseconds');
+const startBtn = document.getElementById('startBtn');
+const stopBtn = document.getElementById('stopBtn');
+const resetBtn = document.getElementById('resetBtn');
+
+// Load saved time from localStorage if available
+window.onload = function() {
+    const savedTime = localStorage.getItem('stopwatchTime');
+    if (savedTime) {
+        const time = JSON.parse(savedTime);
+        minutes = time.minutes;
+        seconds = time.seconds;
+        milliseconds = time.milliseconds;
+        updateDisplay();
+        resetBtn.disabled = false;  // Enable reset if saved time exists
+    }
+};
+
+startBtn.addEventListener('click', startTimer);
+stopBtn.addEventListener('click', stopTimer);
+resetBtn.addEventListener('click', resetTimer);
+
+function startTimer() {
+    startBtn.disabled = true;
+    stopBtn.disabled = false;
+    resetBtn.disabled = false;
+
+    timerInterval = setInterval(() => {
+        milliseconds++;
+        if (milliseconds === 100) {
+            milliseconds = 0;
+            seconds++;
+        }
+        if (seconds === 60) {
+            seconds = 0;
+            minutes++;
+        }
+
+        updateDisplay();
+        saveTime(); // Save time to localStorage
+    }, 10);
+}
+
+function stopTimer() {
+    clearInterval(timerInterval);
+    startBtn.disabled = false;
+    stopBtn.disabled = true;
+}
+
+function resetTimer() {
+    clearInterval(timerInterval);
+    minutes = 0;
+    seconds = 0;
+    milliseconds = 0;
+    updateDisplay();
+    localStorage.removeItem('stopwatchTime'); // Clear saved time from localStorage
+    startBtn.disabled = false;
+    stopBtn.disabled = true;
+    resetBtn.disabled = true; // Disable reset button after reset
+}
+
+function updateDisplay() {
+    displayMinutes.innerText = String(minutes).padStart(2, '0');
+    displaySeconds.innerText = String(seconds).padStart(2, '0');
+    displayMilliseconds.innerText = String(milliseconds).padStart(2, '0');
+}
+
+function saveTime() {
+    const time = {
+        minutes: minutes,
+        seconds: seconds,
+        milliseconds: milliseconds
+    };
+    localStorage.setItem('stopwatchTime', JSON.stringify(time));
+}
+</script>
+</body>
+</html>

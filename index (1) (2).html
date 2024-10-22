@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: sans-serif;
+    color: #ffffff;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-color: #141414;
+    flex-direction: column;
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    padding: 10px;
+    background-color: #151313;
+    color: #fff;
+    margin: 0;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    box-shadow: 0 0 10px white;
+}
+
+.container {
+    position: relative;
+    margin-top: 80px; /* Ensuring space for fixed header */
+}
+
+.clock {
+    width: 300px;
+    height: 300px;
+    border-radius: 15%;
+    background-color: rgba(3, 1, 1, 0.52);
+    border: 2px solid rgba(108, 100, 100, 0.62);
+    box-shadow: 0px 0px 15px 30px rgba(0, 0, 0, 0.9);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+
+.clock span {
+    position: absolute;
+    transform: rotate(calc(30deg * var(--i)));
+    inset: 12px;
+    text-align: center;
+}
+
+.clock span b {
+    transform: rotate(calc(-30deg * var(--i)));
+    display: inline-block;
+    font-size: 20px;
+}
+
+.clock::before {
+    content: '';
+    position: absolute;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background-color: #fff;
+    z-index: 2;
+}
+
+.hand {
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+}
+
+.hand i {
+    position: absolute;
+    background-color: var(--clr);
+    width: 4px;
+    height: var(--h);
+    border-radius: 8px;
+}
+
+.country-btn {
+    background-color: #ff3d58;
+    color: white;
+    border: none;
+    padding: 10px 10px;
+    cursor: pointer;
+    border-radius: 4px;
+}
+
+.country-btn:hover {
+    background-color: #e63946;
+}
+#am-pm {
+    font-size: 1.5rem;      /* Size of AM/PM text */
+    color: #ffffff;         /* Text color (white) */
+    position: absolute;     /* Positioning relative to clock *
+    top: 50%;               /* Vertically center it */
+    top: 50px;
+    right: 4%;           
+    padding: 10px;          /* Add padding around the text */
+    border-radius: 5px;     /* Slightly round corners */
+}
+
+
+#country-list select {
+    padding: 10px;
+    font-size: 14px;
+    margin-top: 0px;
+    width: 100px;
+    background-color: #A09898;
+    color: #333;
+    border: none;
+    border-radius: 4px;
+}
+
+#country-list {
+    margin-top: 0px;
+    color: #1C1919;
+}
+.footer-icons{
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    padding: 10px;
+    background-color: #151313;
+    color: #fff;
+    margin: 0;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    box-shadow: 0 0 10px white;
+}
+.footer-icons {
+  display: flex;
+  justify-content: space-around;
+  padding: 10px;
+}
+
+.footer-icons i {
+  color: white;
+  font-size: 24px;
+  cursor: pointer;
+}
+
+  </style>
+    <title>World Clock</title>
+</head>
+
+<body>
+    <!-- Header with Title and Select Country Button -->
+    <header>
+        <div class="logo">
+            <h1>Clock</h1>
+        </div>
+        <button class="country-btn" onclick="toggleDropdown()">Select Country</button>
+        <!-- Dropdown list of countries -->
+        <div id="country-list" class="dropdown" style="display: none;">
+            <select id="country-select" onchange="changeTimeZone()">
+              <!-- A -->
+<option value="Africa/Abidjan">Ivory Coast</option>
+<option value="Africa/Accra">Ghana</option>
+<option value="Africa/Addis_Ababa">Ethiopia</option>
+<option value="Africa/Algiers">Algeria</option>
+<option value="Africa/Asmara">Eritrea</option>
+<option value="Africa/Antananarivo">Madagascar</option>
+<option value="Asia/Aden">Yemen</option>
+<option value="Asia/Almaty">Kazakhstan</option>
+<option value="Asia/Amman">Jordan</option>
+<option value="Asia/Anadyr">Russia</option>
+<option value="Asia/Aqtau">Kazakhstan</option>
+<option value="Asia/Aqtobe">Kazakhstan</option>
+<option value="Asia/Ashgabat">Turkmenistan</option>
+<option value="Asia/Atyrau">Kazakhstan</option>
+<option value="America/Adak">United States (Alaska)</option>
+<option value="America/Anchorage">United States (Anchorage)</option>
+<option value="America/Antigua">Antigua and Barbuda</option>
+<option value="America/Argentina/Buenos_Aires">Argentina (Buenos Aires)</option>
+<option value="America/Asuncion">Paraguay</option>
+<option value="Australia/Adelaide">Australia (Adelaide)</option>
+<option value="Australia/Brisbane">Australia (Brisbane)</option>
+
+<!-- B -->
+<option value="Africa/Bamako">Mali</option>
+<option value="Africa/Bangui">Central African Republic</option>
+<option value="Africa/Banjul">The Gambia</option>
+<option value="Africa/Bissau">Guinea-Bissau</option>
+<option value="Africa/Blantyre">Malawi</option>
+<option value="Africa/Brazzaville">Congo-Brazzaville</option>
+<option value="America/Barbados">Barbados</option>
+<option value="America/Bahia">Brazil (Bahia)</option>
+<option value="America/Belize">Belize</option>
+<option value="Asia/Bangkok">Thailand</option>
+<option value="Asia/Beirut">Lebanon</option>
+<option value="Asia/Bishkek">Kyrgyzstan</option>
+<option value="Asia/Brunei">Brunei</option>
+<option value="Australia/Broken_Hill">Australia (Broken Hill)</option>
+
+<!-- C -->
+<option value="Africa/Cairo">Egypt</option>
+<option value="Africa/Casablanca">Morocco</option>
+<option value="Africa/Ceuta">Ceuta, Melilla</option>
+<option value="America/Caracas">Venezuela</option>
+<option value="America/Cayenne">French Guiana</option>
+<option value="America/Chicago">United States (Chicago)</option>
+<option value="America/Chihuahua">Mexico (Chihuahua)</option>
+<option value="Asia/Colombo">Sri Lanka</option>
+<option value="Asia/Chita">Russia (Chita)</option>
+<option value="Asia/Choibalsan">Mongolia (Choibalsan)</option>
+<option value="America/Costa_Rica">Costa Rica</option>
+<option value="Europe/Copenhagen">Denmark</option>
+
+<!-- D -->
+<option value="Africa/Dakar">Senegal</option>
+<option value="Africa/Dar_es_Salaam">Tanzania</option>
+<option value="America/Dawson">Canada (Dawson)</option>
+<option value="America/Denver">United States (Denver)</option>
+<option value="America/Detroit">United States (Detroit)</option>
+<option value="Asia/Dhaka">Bangladesh</option>
+<option value="Asia/Dili">East Timor</option>
+<option value="Asia/Dubai">United Arab Emirates</option>
+<option value="Europe/Dublin">Ireland</option>
+
+<!-- E -->
+<option value="America/Eirunepe">Brazil (Eirunepe)</option>
+<option value="America/Edmonton">Canada (Edmonton)</option>
+<option value="Asia/Erbil">Iraq</option>
+<option value="Europe/Helsinki">Finland</option>
+
+<!-- F -->
+<option value="America/Fortaleza">Brazil (Fortaleza)</option>
+<option value="Africa/Freetown">Sierra Leone</option>
+<option value="Pacific/Fiji">Fiji</option>
+
+<!-- G -->
+<option value="Africa/Gaborone">Botswana</option>
+<option value="America/Guatemala">Guatemala</option>
+<option value="America/Guayaquil">Ecuador</option>
+<option value="Asia/Gaza">Palestine</option>
+<option value="Asia/Tbilisi">Georgia</option>
+<option value="Europe/Gibraltar">Gibraltar</option>
+
+<!-- H -->
+<option value="America/Halifax">Canada (Halifax)</option>
+<option value="America/Havana">Cuba</option>
+<option value="Pacific/Honolulu">United States (Hawaii)</option>
+
+<!-- I -->
+<option value="America/Iqaluit">Canada (Iqaluit)</option>
+<option value="America/Indianapolis">United States (Indianapolis)</option>
+<option value="Asia/Irkutsk">Russia (Irkutsk)</option>
+<option value="Asia/Istanbul">Turkey</option>
+
+<!-- J -->
+<option value="America/Jamaica">Jamaica</option>
+<option value="Asia/Jakarta">Indonesia (Jakarta)</option>
+<option value="Asia/Jerusalem">Israel</option>
+
+<!-- K -->
+<option value="Africa/Kampala">Uganda</option>
+<option value="Asia/Karachi">Pakistan</option>
+<option value="Asia/Kolkata">India</option>
+<option value="Europe/Kiev">Ukraine</option>
+
+<!-- L -->
+<option value="Africa/Lagos">Nigeria</option>
+<option value="America/Lima">Peru</option>
+<option value="Asia/London">United Kingdom (London)</option>
+
+<!-- M -->
+<option value="America/Maceio">Brazil (Maceio)</option>
+<option value="America/Managua">Nicaragua</option>
+<option value="Asia/Manila">Philippines</option>
+
+<!-- N -->
+<option value="America/Nassau">Bahamas</option>
+<option value="America/New_York">United States (New York)</option>
+<option value="Asia/Nairobi">Kenya</option>
+
+<!-- O -->
+<option value="America/Ottawa">Canada (Ottawa)</option>
+<option value="Asia/Omsk">Russia (Omsk)</option>
+
+<!-- P -->
+<option value="America/Panama">Panama</option>
+<option value="Asia/Phnom_Penh">Cambodia</option>
+<option value="Pacific/Port_Moresby">Papua New Guinea</option>
+
+<!-- Q -->
+<option value="Asia/Qatar">Qatar</option>
+
+<!-- R -->
+<option value="Asia/Riyadh">Saudi Arabia</option>
+
+<!-- S -->
+<option value="America/Santiago">Chile</option>
+<option value="Europe/Stockholm">Sweden</option>
+
+<!-- T -->
+<option value="Asia/Taipei">Taiwan</option>
+<option value="Asia/Tehran">Iran</option>
+
+<!-- U -->
+<option value="America/Uruguay">Uruguay</option>
+
+<!-- V -->
+<option value="Asia/Vladivostok">Russia (Vladivostok)</option>
+
+<!-- W -->
+<option value="Europe/Warsaw">Poland</option>
+
+<!-- Y -->
+<option value="Asia/Yangon">Myanmar</option>
+<option value="Asia/Yekaterinburg">Russia (Yekaterinburg)</option>
+
+<!-- Z -->
+<option value="Africa/Zurich">Switzerland</option>
+
+            </select>
+        </div>
+    </header>
+    <!-- Container for the Clock -->
+    <div class="container1">
+        <div class="clock">
+            <div style="--clr: #ff3d58; --h: 74px" id="hour" class="hand">
+                <i></i>
+            </div>
+            <div style="--clr: #00a6ff; --h: 84px" id="min" class="hand">
+                <i></i>
+            </div>
+            <div style="--clr: #ffffff; --h: 94px" id="sec" class="hand">
+                <i></i>
+            </div>
+            <span style="--i: 1"><b>1</b></span>
+            <span style="--i: 2"><b>2</b></span>
+            <span style="--i: 3"><b>3</b></span>
+            <span style="--i: 4"><b>4</b></span>
+            <span style="--i: 5"><b>5</b></span>
+            <span style="--i: 6"><b>6</b></span>
+            <span style="--i: 7"><b>7</b></span>
+            <span style="--i: 8"><b>8</b></span>
+            <span style="--i: 9"><b>9</b></span>
+            <span style="--i: 10"><b>10</b></span>
+            <span style="--i: 11"><b>11</b></span>
+            <span style="--i: 12"><b>12</b></span>
+            <!-- Add AM/PM display -->
+    <span id="am-pm"></span> <!-- AM/PM display -->
+  </div>
+</div>
+<script>
+let hr = document.getElementById('hour');
+let min = document.getElementById('min');
+let sec = document.getElementById('sec');
+let amPmDisplay = document.getElementById('am-pm');
+
+// Load the previously selected time zone from localStorage, or default to 'Asia/Karachi'
+let selectedTimeZone = localStorage.getItem('selectedTimeZone') || 'Asia/Karachi';
+
+// Function to display time and AM/PM
+function displayTime() {
+    // Get the current time in the selected time zone
+    let date = new Date(new Date().toLocaleString("en-US", { timeZone: selectedTimeZone }));
+
+    let hh = date.getHours();
+    let mm = date.getMinutes();
+    let ss = date.getSeconds();
+    let amPm = hh >= 12 ? 'PM' : 'AM';
+
+    // Convert 24-hour format to 12-hour format
+    hh = hh % 12;
+    hh = hh ? hh : 12; // If hour = 0, display it as 12
+
+    // Rotate the clock hands
+    let hRotation = 30 * (hh % 12) + mm / 2;
+    let mRotation = 6 * mm;
+    let sRotation = 6 * ss;
+
+    hr.style.transform = `rotate(${hRotation}deg)`;
+    min.style.transform = `rotate(${mRotation}deg)`;
+    sec.style.transform = `rotate(${sRotation}deg)`;
+
+    // Update the AM/PM display
+    amPmDisplay.textContent = amPm;
+}
+
+setInterval(displayTime, 1000);
+
+// Toggle country dropdown visibility
+function toggleDropdown() {
+    const countryList = document.getElementById('country-list');
+    countryList.style.display = countryList.style.display === 'none' ? 'block' : 'none';
+}
+
+// Change time zone based on selected country
+function changeTimeZone() {
+    const countrySelect = document.getElementById('country-select');
+    selectedTimeZone = countrySelect.value;
+    localStorage.setItem('selectedTimeZone', selectedTimeZone); // Save the selected time zone in localStorage
+    toggleDropdown(); // Close the dropdown after selecting a country
+}
+
+// Set the dropdown to the saved value when the page loads
+document.addEventListener('DOMContentLoaded', function() {
+    const countrySelect = document.getElementById('country-select');
+    countrySelect.value = selectedTimeZone; // Set dropdown to the stored time zone value
+});
+</script>
+  <div class="footer-icons">
+<!-- Clock Icon with a link -->
+<a href="/index (1).html">  <!-- This will take the user to the clock page -->
+  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-clock" viewBox="0 0 16 16">
+    <path d="M8 3.5a.5.5 0 0 1 .5.5v4h3a.5.5 0 0 1 0 1h-3.5A.5.5 0 0 1 8 8V4a.5.5 0 0 1 .5-.5z"/>
+    <path d="M8 16A8 8 0 1 1 8 0a8 8 0 0 1 0 16zM1 8a7 7 0 1 0 14 0A7 7 0 0 0 1 8z"/>
+  </svg>
+</a>
+
+<!-- Stopwatch Icon with a link -->
+<a href="/index stop.html">  <!-- This will take the user to the stopwatch page -->
+  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-stopwatch" viewBox="0 0 16 16">
+    <path d="M6.5 1h3v1h-3V1z"/>
+    <path d="M8 1a7 7 0 1 0 7 7 7 7 0 0 0-7-7zM8 0a8 8 0 1 1-8 8A8 8 0 0 1 8 0z"/>
+    <path d="M7.5 4h1v5h-1V4zm2.86-1.79l-.707-.707 1.415-1.414.707.707-1.415 1.414z"/>
+  </svg>
+</a>
+
+<!-- Timer Icon with a link -->
+<a href="/index.html">  <!-- This will take the user to the timer page -->
+  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-hourglass-split" viewBox="0 0 16 16">
+    <path d="M2 15.5V14h12v1.5a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5zM2 0h12v1.5a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5V0zm2.596 2.5H11.5a.5.5 0 0 1 .5.5v2.707a2 2 0 0 1-.563 1.39L9.74 9l1.697 1.903a2 2 0 0 1 .563 1.39V15a.5.5 0 0 1-.5.5H4.104a.5.5 0 0 1-.5-.5v-2.707a2 2 0 0 1 .563-1.39L6.26 9 4.563 7.097a2 2 0 0 1-.563-1.39V3a.5.5 0 0 1 .5-.5zM11 3H5v2.707c0 .278.08.547.227.776L7.229 9l-2.002 2.517a1 1 0 0 0-.227.776V15h6v-2.707a1 1 0 0 0-.227-.776L8.771 9l2.002-2.517A1 1 0 0 0 11 5.707V3z"/>
+  </svg>
+</a>
+  </div>
+</footer>
+</body>
+</html>
