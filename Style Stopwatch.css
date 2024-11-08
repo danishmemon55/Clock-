@@ -1,0 +1,142 @@
+
+    * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #141414;
+    font-family: 'Arial', sans-serif;
+}
+header {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    padding: 10px;
+    background-color: #151313;
+    color: #fff;
+    margin: 0;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    box-shadow: 0 0 10px white;
+}
+
+
+.stopwatch-container {
+    width: 300px;
+    height: 300px;
+    border-radius: 15%;
+    background-color: rgba(3, 1, 1, 0.52);
+    border: 2px solid rgba(108, 100, 100, 0.62);
+    box-shadow: 0px 0px 15px 30px rgba(0, 0, 0, 0.9);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    left: 10px;
+    right: 0;
+}
+
+.stopwatch-display {
+    margin-top: 40px;
+    font-size: 2rem;
+    font-weight: bold;
+    color: #FFFFFF;
+    letter-spacing: 2px;
+}
+
+.controls {
+    margin-top: 100px;
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+    width: 100%; /* Ensure the buttons take up full width */
+    padding: 0 20px; /* Add some padding to center them better */
+}
+
+.controls button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    background-color: #1e90ff;
+    color: white;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    flex: 1; /* Ensure buttons take equal width */
+}
+
+.controls button:hover {
+    background-color: #007bff;
+}
+
+.controls button:disabled {
+    background-color: #aaa;
+    cursor: not-allowed;
+}
+
+#startBtn {
+    background-color: #2B2B2B;
+}
+
+#startBtn:hover {
+    background-color: #218838;
+}
+
+#stopBtn {
+    background-color: #271214;
+}
+
+#stopBtn:hover {
+    background-color: #c82333;
+}
+
+#resetBtn {
+    background-color: #342F21;
+}
+
+#resetBtn:hover {
+    background-color: #e0a800;
+}
+.footer-icons {
+ display: flex;
+ justify-content: space-between;
+ width: 100%;
+ padding: 10px;
+ background-color: #151313;;
+ color: #fff;
+ margin: 0;
+ position: fixed;
+ bottom: 0;
+ left: 0;
+ right: 0;
+ box-shadow: 0 0 10px white;
+}
+
+.footer-icons {
+ display: flex;
+ justify-content: space-around;
+ padding: 10px;
+}
+
+.footer-icons i {
+ color: white;
+ font-size: 24px;
+ cursor: pointer;
+}
+.footer-icons a svg {
+    fill: white;
+    transition: fill 0.3s ease; /* Optional: for a smooth hover effect */
+}
+
+.footer-icons a:hover svg {
+    fill: #ccc; /* Optional: changes color when you hover over the icons */
+}

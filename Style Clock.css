@@ -1,0 +1,153 @@
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: sans-serif;
+    color: #ffffff;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-color: #141414;
+    flex-direction: column;
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    padding: 10px;
+    background-color: #151313;
+    color: #fff;
+    margin: 0;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    box-shadow: 0 0 10px white;
+}
+
+.container {
+    position: relative;
+    margin-top: 80px; /* Ensuring space for fixed header */
+}
+
+.clock {
+    width: 300px;
+    height: 300px;
+    border-radius: 15%;
+    background-color: rgba(3, 1, 1, 0.52);
+    border: 2px solid rgba(108, 100, 100, 0.62);
+    box-shadow: 0px 0px 15px 30px rgba(0, 0, 0, 0.9);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+
+.clock span {
+    position: absolute;
+    transform: rotate(calc(30deg * var(--i)));
+    inset: 12px;
+    text-align: center;
+}
+
+.clock span b {
+    transform: rotate(calc(-30deg * var(--i)));
+    display: inline-block;
+    font-size: 20px;
+}
+
+.clock::before {
+    content: '';
+    position: absolute;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background-color: #fff;
+    z-index: 2;
+}
+
+.hand {
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+}
+
+.hand i {
+    position: absolute;
+    background-color: var(--clr);
+    width: 4px;
+    height: var(--h);
+    border-radius: 8px;
+}
+
+.country-btn {
+    background-color: #ff3d58;
+    color: white;
+    border: none;
+    padding: 10px 10px;
+    cursor: pointer;
+    border-radius: 4px;
+}
+
+.country-btn:hover {
+    background-color: #e63946;
+}
+#am-pm {
+    font-size: 1.5rem;      /* Size of AM/PM text */
+    color: #ffffff;         /* Text color (white) */
+    position: absolute;     /* Positioning relative to clock *
+    top: 50%;               /* Vertically center it */
+    top: 50px;
+    right: 4%;           
+    padding: 10px;          /* Add padding around the text */
+    border-radius: 5px;     /* Slightly round corners */
+}
+
+
+#country-list select {
+    padding: 10px;
+    font-size: 14px;
+    margin-top: 0px;
+    width: 100px;
+    background-color: #A09898;
+    color: #333;
+    border: none;
+    border-radius: 4px;
+}
+
+#country-list {
+    margin-top: 0px;
+    color: #1C1919;
+}
+.footer-icons{
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    padding: 10px;
+    background-color: #151313;
+    color: #fff;
+    margin: 0;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    box-shadow: 0 0 10px white;
+}
+.footer-icons {
+  display: flex;
+  justify-content: space-around;
+  padding: 10px;
+}
+
+.footer-icons i {
+  color: white;
+  font-size: 24px;
+  cursor: pointer;
+}
